@@ -1,0 +1,13 @@
+version: "3"
+services:
+  mumble:
+    build: docker-mumble/.
+    volumes:
+      - ./data:/etc/mumble
+    ports:
+      - 64738:64738
+      - 64738:64738/udp
+    environment:
+      TZ: Europe/Berlin
+    restart: unless-stopped
+
