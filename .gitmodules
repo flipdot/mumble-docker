@@ -1,3 +1,3 @@
 [submodule "docker-mumble"]
 	path = docker-mumble
-	url = https://github.com/PHLAK/docker-mumble.git
+	url = https://github.com/flipdot/docker-mumble.git
