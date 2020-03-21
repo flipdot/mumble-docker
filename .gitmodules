@@ -1,3 +1,6 @@
 [submodule "mumble"]
 	path = mumble
 	url = https://github.com/flipdot/mumble.git
+[submodule "plugins/botamusique-docker/botamusique"]
+	path = plugins/botamusique-docker/botamusique
+	url = https://github.com/azlux/botamusique.git

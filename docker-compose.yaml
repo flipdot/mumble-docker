@@ -10,4 +10,5 @@ services:
     environment:
       TZ: Europe/Berlin
     restart: unless-stopped
-
+  botamusique:
+    build: plugins/botamusique-docker/.
