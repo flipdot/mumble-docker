@@ -1,14 +1,19 @@
 version: "3"
 services:
+
   mumble:
     build: mumble/.
+    command: /usr/bin/murmurd -v -fg -ini /etc/murmur/murmur.ini
     volumes:
-      - ./data:/etc/mumble
+      - ./data:/etc/murmur
     ports:
       - 64738:64738
       - 64738:64738/udp
     environment:
       TZ: Europe/Berlin
     restart: unless-stopped
+
   botamusique:
     build: plugins/botamusique-docker/.
+    volumes:
+      - ./data/botamusique:/data/

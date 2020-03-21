@@ -30,10 +30,10 @@ jobs:
           -days 30 \
           -subj '/CN=localhost'
 
-    - name: Run
-      run: docker-compose up &
-    - name: Test
+    - name: Run and Test
       run: |
+        docker-compose up &
+        
         echo "=== Waiting for server to start... ==="
         success=false
         for i in {1..10}; do
@@ -47,12 +47,10 @@ jobs:
         done
         if [ "$success" != true ]; then
           echo "=== Fail! ==="
+          exit 1
         fi
-
-    - name: Teardown
-      run: docker-compose down -v
 
     - name: Check mumble database exists
       run: '[ -s data/murmur.sqlite ]'
     - name: Check botamusique database exists
-      run: '[ -s data/botamusique.db ]'
+      run: '[ -s data/botamusique/database.db ]'
