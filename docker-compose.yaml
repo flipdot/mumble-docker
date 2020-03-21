@@ -2,7 +2,7 @@ version: "3"
 services:
 
   mumble:
-    image: docker.pkg.github.com/flipdot/docker-mumble/mumble:latest
+    image: docker.pkg.github.com/flipdot/mumble-docker/mumble:latest
     command: /usr/bin/murmurd -v -fg -ini /etc/murmur/murmur.ini
     volumes:
       - ./data:/etc/murmur
@@ -14,6 +14,6 @@ services:
     restart: unless-stopped
 
   botamusique:
-    image: docker.pkg.github.com/flipdot/docker-mumble/botamusique:latest
+    image: docker.pkg.github.com/flipdot/mumble-docker/botamusique:latest
     volumes:
       - ./data/botamusique:/data/

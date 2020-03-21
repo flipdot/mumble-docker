@@ -99,12 +99,19 @@ jobs:
           -days 30 \
           -subj '/CN=localhost'
 
-        ls -lah data
-        
+    - name: Modify docker-compose.yaml
+      run: |
         sed -i "s#docker\.pkg\.github\.com/.*mumble:latest#$(cat image_mumble/image.txt)#" docker-compose.yaml  
         sed -i "s#docker\.pkg\.github\.com/.*botamusique:latest#$(cat image_botamusique/image.txt)#" docker-compose.yaml
         cat docker-compose.yaml
-        docker-compose pull -q
+    - name: Download containers
+      run: docker-compose pull -q
+
+    - name: Set permissions
+      run: sudo chown -R 1000:1000 data
+
+    - name: Run and test
+      run: |
         docker-compose up &
 
         echo "=== Waiting for server to start... ==="
