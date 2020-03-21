@@ -4,3 +4,6 @@
 [submodule "plugins/botamusique-docker/botamusique"]
 	path = plugins/botamusique-docker/botamusique
 	url = https://github.com/azlux/botamusique.git
+[submodule "gumble"]
+	path = gumble
+	url = https://github.com/mumble-voip/grumble.git
