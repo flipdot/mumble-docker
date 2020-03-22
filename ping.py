@@ -29,13 +29,15 @@ print("recvd %d bytes" % len(data))
 r = unpack(">bbbbQiii", data)
 
 version = r[1:4]
-# r[0,1,2,3] = version
-# r[4] = ts
-# r[5] = users
-# r[6] = max users
-# r[7] = bandwidth
+ts = r[4]
+users = r[5]
+max_users = r[6]
+bandwidth = r[7]
 
 ping = (datetime.datetime.now().microsecond - r[4]) / 1000.0
 if ping < 0: ping = ping + 1000
 
-print("Version %d.%d.%d, %d/%d Users, %.1fms, %dkbit/s" % (version + (r[5], r[6], ping, r[7]/1000)))
+print("# Version %d.%d.%d, %d/%d Users, ping %.1fms, %dkbit/s" %
+      (version + (users, max_users, ping, bandwidth/1000)))
+
+print("users =", users)
