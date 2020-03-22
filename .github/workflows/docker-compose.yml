@@ -110,8 +110,12 @@ jobs:
     - name: Set permissions
       run: sudo chown -R 1000:1000 data
 
+    - name: Amend plugin configs for fresh server
+      run: sed -i "s/^channel.*/channel = flipdot/" data/botamusique/configuration.ini
+
     - name: Run and test
       run: |
+        
         docker-compose up &
 
         echo "=== Waiting for server to start... ==="
@@ -129,8 +133,19 @@ jobs:
           echo "=== Fail! ==="
           exit 1
         fi
+        # wait a few, and do another snapshot for later
+        sleep 5
+        python3 ping.py localhost 64738 | tee ping.txt
 
     - name: Check mumble database exists
-      run: '[ -s data/murmur.sqlite ]'
+      run: '[ -s data/database.sqlite ]'
+
+    - name: Check that botamusique started, too
+      run: |
+        if ! grep "users = 1" ping.txt; then
+          echo "=== Botamusique broken ==="
+          exit 1
+        fi
+
     - name: Check botamusique database exists
       run: '[ -s data/botamusique/database.db ]'
