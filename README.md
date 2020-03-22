@@ -20,3 +20,8 @@ git clone --recurse-submodules git@github.com:flipdot/mumble-docker.git
 cd mumble-docker
 docker-compose up
 ```
+
+## Local development
+
+If you want to develop on these yourself, you will need to build the containers locally.
+To do this, open up `docker-compose.yaml`, comment out the `image:` lines, and un-comment the `build:` lines.
