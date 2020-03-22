@@ -3,9 +3,10 @@ services:
 
   mumble:
     image: docker.pkg.github.com/flipdot/mumble-docker/mumble:latest
-    command: /usr/bin/murmurd -v -fg -ini /etc/murmur/murmur.ini
+    # build: mumble/.
+    command: /usr/bin/murmurd -v -fg -ini /data/config.ini
     volumes:
-      - ./data:/etc/murmur
+      - ./data:/data
     ports:
       - 64738:64738
       - 64738:64738/udp
@@ -15,5 +16,9 @@ services:
 
   botamusique:
     image: docker.pkg.github.com/flipdot/mumble-docker/botamusique:latest
+    #build: plugins/botamusique-docker/.
     volumes:
       - ./data/botamusique:/data/
+    depends_on:
+      - mumble
+    restart: unless-stopped
