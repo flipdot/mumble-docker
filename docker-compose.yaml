@@ -1,14 +1,24 @@
 version: "3"
 services:
+
   mumble:
-    build: mumble/.
+    image: docker.pkg.github.com/flipdot/mumble-docker/mumble:latest
+    # build: mumble/.
+    command: /usr/bin/murmurd -v -fg -ini /data/config.ini
     volumes:
-      - ./data:/etc/mumble
+      - ./data:/data
     ports:
       - 64738:64738
       - 64738:64738/udp
     environment:
       TZ: Europe/Berlin
     restart: unless-stopped
+
   botamusique:
-    build: plugins/botamusique-docker/.
+    image: docker.pkg.github.com/flipdot/mumble-docker/botamusique:latest
+    #build: plugins/botamusique-docker/.
+    volumes:
+      - ./data/botamusique:/data/
+    depends_on:
+      - mumble
+    restart: unless-stopped

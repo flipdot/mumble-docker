@@ -14,8 +14,7 @@ RUN cd /botamusique \
   && venv/bin/pip install -r pymumble/requirements.txt \
   && venv/bin/pip install -r requirements.txt
 
-COPY configuration.ini /botamusique/configuration.ini
-
-CMD /botamusique/venv/bin/python /botamusique/mumbleBot.py --config /botamusique/configuration.ini
+CMD /botamusique/venv/bin/python /botamusique/mumbleBot.py --config /data/configuration.ini
 
 VOLUME /music
+VOLUME /data
