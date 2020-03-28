@@ -75,7 +75,11 @@ jobs:
     needs: build_docker_images
 
     steps:
-    - uses: actions/checkout@v2 # no need for submodules here
+    - uses: actions/checkout@v2
+      # use submodules, as long as we don't use our own images...
+      with:
+        fetch-depth: 0 # celt submodule has dumb http transport
+        submodules: recursive
 
     - name: Download package name for mumble
       uses: actions/download-artifact@v1
