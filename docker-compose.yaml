@@ -2,9 +2,11 @@ version: "2.4"
 services:
 
   mumble:
-    image: docker.pkg.github.com/flipdot/mumble-docker/mumble:latest
-    # build: mumble/.
-    command: /usr/bin/murmurd -v -fg -ini /data/config.ini
+    # image: docker.pkg.github.com/flipdot/mumble-docker/mumble:latest
+    #build: mumble/.
+    image: phlak/mumble
+    command: /opt/mumble/murmur.x86 -v -fg -ini /data/config.ini
+    #command: /usr/bin/murmurd -v -fg -ini /data/config.ini
     volumes:
       - ./data:/data
     ports:
@@ -19,8 +21,8 @@ services:
     memswap_limit: 0
     
   botamusique:
-    image: docker.pkg.github.com/flipdot/mumble-docker/botamusique:latest
-    # build: plugins/botamusique-docker/.
+    # image: docker.pkg.github.com/flipdot/mumble-docker/botamusique:latest
+    build: plugins/botamusique-docker/.
     volumes:
       - ./data/botamusique:/data/
     depends_on:
