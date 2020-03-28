@@ -76,7 +76,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      # use submodules, as long as we don't use our own images...
+      #TODO use submodules, as long as we don't use our own images...
       with:
         fetch-depth: 0 # celt submodule has dumb http transport
         submodules: recursive
@@ -119,6 +119,7 @@ jobs:
 
     - name: Run and test
       run: |
+        docker-compose build # TODO because we don't use our hard-earned-built containers right now...
         docker-compose up &
 
         echo "=== Waiting for server to start... ==="
